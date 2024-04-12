@@ -5,67 +5,67 @@
         "message": "Successfully!"
     },
     {
-        "success": true,
+        "success": false,
         "code": 400,
         "message": "Bad request!"
     },
     {
-        "success": true,
+        "success": false,
         "code": 401,
         "message": "Unauthorized!"
     },
     {
-        "success": true,
+        "success": false,
         "code": 403,
         "message": "Forbidden!"
     },
     {
-        "success": true,
+        "success": false,
         "code": 404,
         "message": "Not found!"
     },
     {
-        "success": true,
+        "success": false,
         "code": 405,
         "message": "Method Not Allowed!"
     },
     {
-        "success": true,
+        "success": false,
         "code": 443,
         "message": "Limit wrong password!"
     },
     {
-        "success": true,
+        "success": false,
         "code": 444,
         "message": "Invalid username/password or account_number!"
     },
     {
-        "success": true,
+        "success": false,
         "code": 445,
         "message": "passwordExpireAlert!"
     },
     {
-        "success": true,
+        "success": false,
         "code": 449,
         "message": "Blocked account!"
     },
     {
-        "success": true,
+        "success": false,
         "code": 448,
         "message": "Blocked account with negative balances!"
     },
     {
-        "success": true,
+        "success": false,
         "code": 500,
         "message": "Internal Server Error!"
     },
     {
-        "success": true,
+        "success": false,
         "code": 503,
         "message": "Service Unavailable!"
     },
     {
-        "success": true,
+        "success": false,
         "code": 520,
         "message": "Unknown Error!"
     }
