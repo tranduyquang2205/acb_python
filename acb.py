@@ -36,7 +36,11 @@ class ACB:
             for account in result['data']:
                 if self.account_number == account['accountNumber']:
                     if int(account['balance']) < 0:
-                        return {'code':448,'success': False, 'message': 'Blocked account with negative balances!'} 
+                        return {'code':448,'success': False, 'message': 'Blocked account with negative balances!',
+                                'data': {
+                                    'balance':int(account['balance'])
+                                }
+                                } 
                     else:
                         return {'code':200,'success': True, 'message': 'Thành công',
                                 'data':{
