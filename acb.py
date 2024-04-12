@@ -16,6 +16,7 @@ class ACB:
         self.password = password
         self.username = username
         self.account_number = account_number
+        self.is_login = False
 
     def handleLogin(self):
         data = {
@@ -25,19 +26,39 @@ class ACB:
         }
         return self.curl_post(self.URL["LOGIN"], data)
     def get_balance(self):
-        login = self.login()
+        if not self.is_login:
+            login = self.login()
+            if not login['success']:
+                return login
+                
         result = self.curl_get(self.URL["getBalance"])
         if 'data' in result:
             for account in result['data']:
                 if self.account_number == account['accountNumber']:
-                    return int(account['balance'])
-            return None
+                    return {'code':200,'success': True, 'message': 'Thành công',
+                            'data':{
+                                'account_number':self.account_number,
+                                'balance':int(account['balance'])
+                    }}
+            return {'code':404,'success': False, 'message': 'account_number not found!'} 
         else: 
-            return None
+            return {'code':520 ,'success': False, 'message': 'Unknown Error!'} 
 
     def get_transactions(self, accountNo, rows):
+        if not self.is_login:
+            login = self.login()
+            if not login['success']:
+                return login
+            
         result = self.curl_get(f'https://apiapp.acb.com.vn/mb/legacy/ss/cs/bankservice/saving/tx-history?maxRows={rows}&account={accountNo}')
-        return result
+        if result['codeStatus'] == 200 and 'data' in result:
+                return {'code':200,'success': True, 'message': 'Thành công',
+                            'data':{
+                                'transactions':result['data'],
+                    }}
+        else:
+                return {'code':400,'success': True, 'message': 'Bad request!'}
+
 
     def get_bank_info_func(self, bank_code, ben_account_number):
         result = self.curl_get(f'https://apiapp.acb.com.vn/mb/legacy/ss/cs/bankservice/transfers/accounts/{ben_account_number}?bankCode={bank_code}&accountNumber={self.account_number}')
@@ -54,7 +75,7 @@ class ACB:
         user = self.load_user(self.username)
 
         res = self.handleLogin()
-        print(res)
+        # print(res)
         if 'accessToken' in res:
             self.token = res['accessToken']
             data = json.dumps(res)
@@ -64,6 +85,7 @@ class ACB:
             else:
                 # Implement database update here
                 pass
+            self.is_login = True
             return {'code':200,'success': True, 'message': 'Đăng nhập thành công'}
         elif 'identity' in res and 'passwordExpireAlert' in res['identity'] and res['identity']['passwordExpireAlert']:
             
@@ -324,21 +346,22 @@ class ACB:
     
     
 # testing
-username = "09325984961"
-password = "Vinh5522"
-account_number = "39282697"
+# username = "0932598496"
+# password = "Vinh5522"
+# account_number = "39282697"
 
 # username = "0792818254"
 # password = "Oanh888999"
 # account_number = "34097977"
 
-username = "6560561"
-password = "Dqxkv2205.,!"
-account_number = "6560561"
+# username = "6560561"
+# password = "Dqxkv2205.,!"
+# account_number = "6560561"
 
-acb = ACB(username, password, account_number)
-result = acb.login()
+# acb = ACB(username, password, account_number)
+# result = acb.login()
 
 # result = acb.get_balance()
+# result = acb.get_transactions('39282697', -1)
 
-print(result)
+# print(result)

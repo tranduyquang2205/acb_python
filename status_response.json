@@ -21,13 +21,33 @@
     },
     {
         "success": true,
+        "code": 404,
+        "message": "Not found!"
+    },
+    {
+        "success": true,
         "code": 405,
         "message": "Method Not Allowed!"
     },
     {
         "success": true,
+        "code": 443,
+        "message": "Limit wrong password!"
+    },
+    {
+        "success": true,
         "code": 444,
         "message": "Invalid username/password or account_number!"
+    },
+    {
+        "success": true,
+        "code": 445,
+        "message": "passwordExpireAlert!"
+    },
+    {
+        "success": true,
+        "code": 449,
+        "message": "Blocked account!"
     },
     {
         "success": true,
@@ -38,6 +58,11 @@
         "success": true,
         "code": 503,
         "message": "Service Unavailable!"
+    },
+    {
+        "success": true,
+        "code": 520,
+        "message": "Unknown Error!"
     }
 
 ]
