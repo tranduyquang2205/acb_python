@@ -5,6 +5,9 @@ from acb import ACB
 
 
 app = FastAPI()
+@app.get("/")
+def read_root():
+    return {"Hello": "World"}
 
 class LoginDetails(BaseModel):
     username: str
