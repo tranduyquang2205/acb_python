@@ -2,7 +2,9 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 import uvicorn
 from acb import ACB
-
+import sys
+import traceback
+from api_response import APIResponse
 
 app = FastAPI()
 @app.get("/")
@@ -15,14 +17,19 @@ class LoginDetails(BaseModel):
     account_number: str
 @app.post('/login', tags=["login"])
 def login_api(input: LoginDetails):
-        acb = ACB(input.username, input.password, input.account_number)
-        result = acb.login()
-        return result
+        try:
+                acb = ACB(input.username, input.password, input.account_number)
+                response = acb.login()
+                return APIResponse.json_format(response)
+        except Exception as e:
+            response = str(e)
+            print(traceback.format_exc())
+            print(sys.exc_info()[2])
+            return APIResponse.json_format(response)
 
 @app.post('/get_balance', tags=["get_balance"])
 def get_balance_api(input: LoginDetails):
         acb = ACB(input.username, input.password, input.account_number)
-        result = acb.login()
         balance = acb.get_balance()
         return balance
 class Transactions(BaseModel):

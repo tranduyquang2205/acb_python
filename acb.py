@@ -25,6 +25,7 @@ class ACB:
         }
         return self.curl_post(self.URL["LOGIN"], data)
     def get_balance(self):
+        login = self.login()
         result = self.curl_get(self.URL["getBalance"])
         if 'data' in result:
             for account in result['data']:
@@ -53,6 +54,7 @@ class ACB:
         user = self.load_user(self.username)
 
         res = self.handleLogin()
+        print(res)
         if 'accessToken' in res:
             self.token = res['accessToken']
             data = json.dumps(res)
@@ -63,8 +65,23 @@ class ACB:
                 # Implement database update here
                 pass
             return {'code':200,'success': True, 'message': 'Đăng nhập thành công'}
-        else:
+        elif 'identity' in res and 'passwordExpireAlert' in res['identity'] and res['identity']['passwordExpireAlert']:
+            
+            return {'code':445,'success': False, 'message': 'passwordExpireAlert!'} 
+        
+        elif 'Invalid Credentials' in res['message']:
+            
             return {'code':444,'success': False, 'message': res['message']} 
+        
+        elif 'User not active (9)' in res['message']:
+            
+            return {'code':449,'success': False, 'message': 'Tài khoản đã bị khóa'} 
+        
+        elif 'User not active (3)' in res['message']:
+            
+            return {'code':443,'success': False, 'message': 'Tên truy cập đã bị khóa do nhập sai mật khẩu 5 lần liên tiếp'} 
+        else:
+            return {'code':400,'success': False, 'message': res['message']} 
 
     def get_bank_info(self,bank_code, ben_account_number):
         user = self.load_user(self.username)
@@ -304,3 +321,24 @@ class ACB:
                 break
 
         return {'success': status, 'message': message, 'data': data}
+    
+    
+# testing
+username = "09325984961"
+password = "Vinh5522"
+account_number = "39282697"
+
+# username = "0792818254"
+# password = "Oanh888999"
+# account_number = "34097977"
+
+username = "6560561"
+password = "Dqxkv2205.,!"
+account_number = "6560561"
+
+acb = ACB(username, password, account_number)
+result = acb.login()
+
+# result = acb.get_balance()
+
+print(result)

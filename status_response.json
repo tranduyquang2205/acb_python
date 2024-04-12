@@ -1,0 +1,43 @@
+[
+    {
+        "success": true,
+        "code": 200,
+        "message": "Successfully!"
+    },
+    {
+        "success": true,
+        "code": 400,
+        "message": "Bad request!"
+    },
+    {
+        "success": true,
+        "code": 401,
+        "message": "Unauthorized!"
+    },
+    {
+        "success": true,
+        "code": 403,
+        "message": "Forbidden!"
+    },
+    {
+        "success": true,
+        "code": 405,
+        "message": "Method Not Allowed!"
+    },
+    {
+        "success": true,
+        "code": 444,
+        "message": "Invalid username/password or account_number!"
+    },
+    {
+        "success": true,
+        "code": 500,
+        "message": "Internal Server Error!"
+    },
+    {
+        "success": true,
+        "code": 503,
+        "message": "Service Unavailable!"
+    }
+
+]
