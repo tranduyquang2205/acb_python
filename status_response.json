@@ -51,6 +51,11 @@
     },
     {
         "success": true,
+        "code": 448,
+        "message": "Blocked account with negative balances!"
+    },
+    {
+        "success": true,
         "code": 500,
         "message": "Internal Server Error!"
     },
