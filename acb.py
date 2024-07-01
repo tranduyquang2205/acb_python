@@ -5,7 +5,7 @@ class ACB:
         self.connect = None  # You can initialize your database connection here
         self.clientId = 'iuSuHYVufIUuNIREV0FB9EoLn9kHsDbm'
         self.URL = {
-            "LOGIN": "https://apiapp.acb.com.vn/mb/auth/tokens",
+            "LOGIN": "https://apiapp.acb.com.vn/mb/v2/auth/tokens",
             "getBalance": "https://apiapp.acb.com.vn/mb/legacy/ss/cs/bankservice/transfers/list/account-payment",
             "INFO": "https://mobile.mbbank.com.vn/retail_lite/loan/getUserInfo",
             "GET_TOKEN": "https://mobile.mbbank.com.vn/retail_lite/loyal/getToken",
@@ -40,7 +40,7 @@ class ACB:
                                 'data': {
                                     'balance':int(account['balance'])
                                 }
-                                } 
+                                }
                     else:
                         return {'code':200,'success': True, 'message': 'Thành công',
                                 'data':{
@@ -361,14 +361,16 @@ class ACB:
 # password = "Oanh888999"
 # account_number = "34097977"
 
-# username = "6560561"
-# password = "Dqxkv2205.,!"
-# account_number = "6560561"
+# # username = "6560561"
+# # password = "Dqxkv2205.,!"
+# # account_number = "6560561"
 
 # acb = ACB(username, password, account_number)
 # result = acb.login()
 
 # result = acb.get_balance()
+# print(result)
+
 # result = acb.get_transactions('39282697', -1)
 
 # print(result)
