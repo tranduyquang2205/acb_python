@@ -98,19 +98,19 @@ class ACB:
             
             return {'code':445,'success': False, 'message': 'passwordExpireAlert!'} 
         
-        elif 'Invalid Credentials' in res['message']:
+        elif 'vn.com.acb.platform.authn.exception.UsernameOrPasswordIncorrectException' in res['error']:
             
-            return {'code':444,'success': False, 'message': res['message']} 
+            return {'code':444,'success': False, 'message': res['error']} 
         
-        elif 'User not active (9)' in res['message']:
+        elif 'vn.com.acb.platform.authn.exception.UserLockedByAdminException' in res['error']:
             
-            return {'code':449,'success': False, 'message': 'Tài khoản đã bị khóa'} 
+            return {'code':449,'success': False, 'message': 'vn.com.acb.platform.authn.exception.UserLockedByAdminException'} 
         
-        elif 'User not active (3)' in res['message']:
+        elif 'vn.com.acb.platform.authn.exception.UserLockedPasswordAttemptException' in res['error']:
             
-            return {'code':443,'success': False, 'message': 'Tên truy cập đã bị khóa do nhập sai mật khẩu 5 lần liên tiếp'} 
+            return {'code':443,'success': False, 'message': 'vn.com.acb.platform.authn.exception.UserLockedPasswordAttemptException'} 
         else:
-            return {'code':400,'success': False, 'message': res['message']} 
+            return {'code':400,'success': False, 'message': res['error']} 
 
     def get_bank_info(self,bank_code, ben_account_number):
         user = self.load_user(self.username)
@@ -357,20 +357,20 @@ class ACB:
 # password = "Vinh5522"
 # account_number = "39282697"
 
-# username = "0792818254"
-# password = "Oanh888999"
-# account_number = "34097977"
+username = "790326"
+password = "Cd222333"
+account_number = "8601561"
 
-# # username = "6560561"
-# # password = "Dqxkv2205.,!"
-# # account_number = "6560561"
+# username = "6560561"
+# password = "Dqxkv2205.,!"
+# account_number = "6560561"
 
-# acb = ACB(username, password, account_number)
-# result = acb.login()
+acb = ACB(username, password, account_number)
+result = acb.login()
 
-# result = acb.get_balance()
-# print(result)
+result = acb.get_balance()
+print(result)
 
-# result = acb.get_transactions('39282697', -1)
+result = acb.get_transactions('40368927', -1)
 
-# print(result)
+print(result)
